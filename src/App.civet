@@ -1,21 +1,102 @@
 "civet autoLet react"
-import { useState } from "react"
+
 import viteLogo from "/vite.svg"
 import reactLogo from "./react.svg"
 import civetLogo from "./civet.png"
 
-Logos := ({ height = "96px" }) =>
-  <div>
-    <a href="https://vite.dev" target="_blank">
-      <img src={viteLogo} {height} .logo .vite alt="Vite logo" />
-    <a href="https://react.dev" target="_blank">
-        <img src={reactLogo} {height} .logo .react alt="React logo" />
-    <a href="https://react.dev" target="_blank">
-        <img src={civetLogo} width={height} {height} .logo .civet alt="Civet logo" />
+import {useState} from "react"
+import {createUseStyles} from "react-jss"
+import {motion} from "motion/react"
+
+brands :=
+  vite: 
+    src: viteLogo
+    href: "https://vite.dev"
+    color: "#646cffaa"
+  react: 
+    src: reactLogo
+    href: "https://react.dev"
+    color: "#61dafbaa"
+    animate: true
+  civet: 
+    src: civetLogo
+    href: "https://civet.dev"
+    color: "#8b4513aa"
+
+useBrandStyles := 
+  for name, info in brands
+    [
+      name,
+      "&:hover":
+        filter: `drop-shadow(0 0 2em ${info.color})`
+    ]
+  |> Object.fromEntries
+  |> createUseStyles
+
+Logo := ({name, src, href, animate=false}) =>
+  classes := useBrandStyles()
+  shared := 
+    className: classes[name]
+    src: src
+    height: "96px"
+    style:
+      padding: "1.5rem"
+    alt: `${name} logo`
+  animation :=   
+    animate: true
+    transition: 
+      ease: "linear"
+      repeat: Infinity
+      duration: 20.0
+  <a {href} target="_blank"> 
+    {
+      if animate
+        <motion.img {...shared, ...animation}>
+      else
+        <img {...shared}>
+    }      
+
+Logos := =>
+  <div>{
+    for name, info in brands
+      <Logo key=name {name, ...info}>
+  }
+
+useButtonStyles := 
+    counter:
+      borderRadius: "8px"
+      border: "1px solid transparent"
+      padding: "0.6em 1.2em"
+      fontSize: "1rem"
+      fontWeight: "500"
+      backgroundColor: "#f9f9f9"
+      cursor: "pointer"
+      transition: "border-color 0.25s"
+      "&:hover":
+        borderColor: "#646cff"
+      "&:focus, &:focus-visible":
+        outline: "4px auto -webkit-focus-ring-color"
+  |> createUseStyles
+
+Counter := =>
+  [count, setCount] := useState 0
+  classes := useButtonStyles()
+  <button .{classes.counter} onClick={=> setCount count+1}>
+      count is {count}
+
+Card := =>
+    <div .card style={padding: "2em", textAlign: "center"}>
+    <Counter>
+    <p style={color: "#213547"}>
+      Edit <code>src/App.civet</code> and save to test HMR
+      
+Footnote := =>
+  <p .read-the-docs style={color: "#888"}>
+    Click on the Vite, React and Civet logos to learn more
 
 export default App := =>
   [count, setCount] := useState 0
-  <div 
+  <div     
     style={
       display: "flex"
       justifyContent: "center"
@@ -24,14 +105,9 @@ export default App := =>
       height: "100vh"
     } 
     >
-    <Logos />
+    <Logos>
     <h1>
       Vite + React + Civet
-    <div .card style={padding: "2em"}>
-      <button onClick={=> setCount count + 1}>
-        count is {count}
-      <p>
-        Edit <code>src/App.civet</code> and save to test HMR
-    <p .read-the-docs>
-      Click on the Vite, React and Civet logos to learn more
+    <Card>
+    <Footnote>
 
