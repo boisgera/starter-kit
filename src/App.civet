@@ -105,7 +105,7 @@ export default App := =>
       alignItems: "center"
       flexDirection: "column"
       height: "100vh"
-    >
+  >
     <Logos>
     <h1>
       "Vite + React + Civet"
