@@ -23,13 +23,13 @@ brands :=
     href: "https://civet.dev"
     color: "#8b4513aa"
 
-useBrandStyles := 
+useBrandStyles := (
   for name, info in brands
-    [
-      name,
-      "&:hover":
-        filter: `drop-shadow(0 0 2em ${info.color})`
-    ]
+    . name,
+    . "&:hover":
+        filter: 
+          `drop-shadow(0 0 2em ${info.color})`
+)
   |> Object.fromEntries
   |> createUseStyles
 
@@ -63,20 +63,21 @@ Logos := =>
       <Logo key=name {name, ...info}>
   }
 
-useButtonStyles := 
-    counter:
-      borderRadius: "8px"
-      border: "1px solid transparent"
-      padding: "0.6em 1.2em"
-      fontSize: "1rem"
-      fontWeight: "500"
-      backgroundColor: "#f9f9f9"
-      cursor: "pointer"
-      transition: "border-color 0.25s"
-      "&:hover":
-        borderColor: "#646cff"
-      "&:focus, &:focus-visible":
-        outline: "4px auto -webkit-focus-ring-color"
+useButtonStyles := {
+  counter:
+    borderRadius: "8px"
+    border: "1px solid transparent"
+    padding: "0.6em 1.2em"
+    fontSize: "1rem"
+    fontWeight: "500"
+    backgroundColor: "#f9f9f9"
+    cursor: "pointer"
+    transition: "border-color 0.25s"
+    "&:hover":
+      borderColor: "#646cff"
+    "&:focus, &:focus-visible":
+      outline: "4px auto -webkit-focus-ring-color"
+} 
   |> createUseStyles
 
 Counter := =>
