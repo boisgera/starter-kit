@@ -99,13 +99,12 @@ Footnote := =>
 export default App := =>
   [count, setCount] := useState 0
   <div     
-    style={
+    style=
       display: "flex"
       justifyContent: "center"
       alignItems: "center"
       flexDirection: "column"
       height: "100vh"
-    } 
     >
     <Logos>
     <h1>
