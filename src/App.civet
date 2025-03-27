@@ -1,4 +1,4 @@
-"civet autoLet react"
+"civet autoLet react jsxCode"
 
 import viteLogo from "/vite.svg"
 import reactLogo from "./react.svg"
@@ -50,18 +50,15 @@ Logo := ({name, src, href, animate=false}) =>
       repeat: Infinity
       duration: 20.0
   <a {href} target="_blank"> 
-    {
       if animate
         <motion.img {...shared, ...animation}>
       else
         <img {...shared}>
-    }      
 
 Logos := =>
-  <div>{
+  <div>
     for name, info in brands
       <Logo key=name {name, ...info}>
-  }
 
 useButtonStyles := {
   counter:
@@ -84,17 +81,20 @@ Counter := =>
   [count, setCount] := useState 0
   classes := useButtonStyles()
   <button .{classes.counter} onClick={=> setCount count+1}>
-      count is {count}
+      `count is ${count}`
 
 Card := =>
     <div .card style={padding: "2em", textAlign: "center"}>
     <Counter>
     <p style={color: "#213547"}>
-      Edit <code>src/App.civet</code> and save to test HMR
+      "Edit" 
+      <code>
+        "src/App.civet" 
+      "and save to test HMR"
 
 Footnote := =>
   <p .read-the-docs style={color: "#888"}>
-    Click on the Vite, React and Civet logos to learn more
+    "Click on the Vite, React and Civet logos to learn more"
 
 export default App := =>
   [count, setCount] := useState 0
@@ -109,7 +109,7 @@ export default App := =>
     >
     <Logos>
     <h1>
-      Vite + React + Civet
+      "Vite + React + Civet"
     <Card>
     <Footnote>
 
