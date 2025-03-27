@@ -43,7 +43,8 @@ Logo := ({name, src, href, animate=false}) =>
       padding: "1.5rem"
     alt: `${name} logo`
   animation :=   
-    animate: true
+    animate:
+      rotate: 360
     transition: 
       ease: "linear"
       repeat: Infinity
@@ -89,7 +90,7 @@ Card := =>
     <Counter>
     <p style={color: "#213547"}>
       Edit <code>src/App.civet</code> and save to test HMR
-      
+
 Footnote := =>
   <p .read-the-docs style={color: "#888"}>
     Click on the Vite, React and Civet logos to learn more
