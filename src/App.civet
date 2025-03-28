@@ -76,7 +76,7 @@ Counter := =>
     borderRadius: "0.5rem"
     borderWidth: "1px" 
     borderStyle: "solid"
-    borderColor: if isHovered { "#646cff" } else { "transparent" }
+    borderColor: if isHovered then "#646cff" else "transparent"
     transition: "border-color 0.25s"
     padding: "0.6em 1.2em"
     fontSize: "1rem"
