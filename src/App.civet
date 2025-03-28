@@ -56,9 +56,9 @@ Logo := ({name, src, href, animate=false}) =>
       duration: 20.0
   <a {href} target="_blank"> 
     if animate
-      <motion.img {...shared, ...animation}>
+      <motion.img ...shared ...animation>
     else
-      <img {...shared}>
+      <img ...shared>
 
 Logos := =>
   <div style={display: "flex", gap: "1.5rem", padding: "1.5rem"}>
