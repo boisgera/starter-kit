@@ -1,3 +1,3 @@
-# React + Vite + Civet
+# Starter Kit
 
-![](images/screenshot.png)
+![app screenshot](images/screenshot.png)
