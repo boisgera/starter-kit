@@ -92,10 +92,10 @@ Card := =>
   <div .card style={padding: "2em", textAlign: "center"}>
   <Counter>
   <p style={color: "#213547"}>
-    "Edit" 
+    "Edit " 
     <code>
       "src/App.civet"
-    "and save to test HMR"
+    " and save to test HMR"
 
 Footnote := =>
   <p .read-the-docs style={color: "#888"}>
