@@ -8,7 +8,17 @@ import {useState} from "react"
 import {createUseStyles} from "react-jss"
 import {motion} from "motion/react"
 
-brands :=
+
+type Brand =
+  src: HTMLImageElement["src"]
+  href: HTMLAnchorElement["href"]
+  color: React.CSSProperties["color"]
+  animate?: boolean
+
+type Brands =
+  [key: string]: Brand
+
+brands : Brands :=
   vite: 
     src: viteLogo
     href: "https://vite.dev"
@@ -23,20 +33,17 @@ brands :=
     href: "https://civet.dev"
     color: "#8b4513aa"
 
-useBrandStyles := (
+useBrandStyles := createUseStyles Object.fromEntries  
   for name, info in brands
     . name,
     . "&:hover":
         filter: 
           `drop-shadow(0 0 2em ${info.color})`
-)
-  |> Object.fromEntries
-  |> createUseStyles
 
 Logo := ({name, src, href, animate=false}) =>
   classes := useBrandStyles()
   shared := 
-    className: classes[name]
+    class: classes[name]
     src: src
     height: "96px"
     style:
@@ -50,17 +57,17 @@ Logo := ({name, src, href, animate=false}) =>
       repeat: Infinity
       duration: 20.0
   <a {href} target="_blank"> 
-      if animate
-        <motion.img {...shared, ...animation}>
-      else
-        <img {...shared}>
+    if animate
+      <motion.img {...shared, ...animation}>
+    else
+      <img {...shared}>
 
 Logos := =>
   <div>
     for name, info in brands
       <Logo key=name {name, ...info}>
 
-useButtonStyles := {
+useButtonStyles := createUseStyles
   counter:
     borderRadius: "8px"
     border: "1px solid transparent"
@@ -74,23 +81,21 @@ useButtonStyles := {
       borderColor: "#646cff"
     "&:focus, &:focus-visible":
       outline: "4px auto -webkit-focus-ring-color"
-} 
-  |> createUseStyles
 
 Counter := =>
   [count, setCount] := useState 0
   classes := useButtonStyles()
   <button .{classes.counter} onClick={=> setCount count+1}>
-      `count is ${count}`
+    `count is ${count}`
 
 Card := =>
-    <div .card style={padding: "2em", textAlign: "center"}>
-    <Counter>
-    <p style={color: "#213547"}>
-      "Edit" 
-      <code>
-        "src/App.civet" 
-      "and save to test HMR"
+  <div .card style={padding: "2em", textAlign: "center"}>
+  <Counter>
+  <p style={color: "#213547"}>
+    "Edit" 
+    <code>
+      "src/App.civet"
+    "and save to test HMR"
 
 Footnote := =>
   <p .read-the-docs style={color: "#888"}>
@@ -98,14 +103,13 @@ Footnote := =>
 
 export default App := =>
   [count, setCount] := useState 0
-  <div     
-    style=
-      display: "flex"
-      justifyContent: "center"
-      alignItems: "center"
-      flexDirection: "column"
-      height: "100vh"
-  >
+  style : React.CSSProperties := 
+    display: "flex"
+    justifyContent: "center"
+    alignItems: "center"
+    flexDirection: "column"
+    height: "100vh"
+  <div {style}>
     <Logos>
     <h1>
       "Vite + React + Civet"
