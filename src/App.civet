@@ -43,7 +43,7 @@ useBrandStyles := createUseStyles Object.fromEntries
 Logo := ({name, src, href, animate=false}) =>
   classes := useBrandStyles()
   shared := 
-    class: classes[name]
+    className: classes[name]
     src: src
     height: "96px"
     alt: `${name} logo`
@@ -65,30 +65,30 @@ Logos := =>
     for name, info in brands
       <Logo key=name {name, ...info}>
 
-useButtonStyles := createUseStyles
-  counter:
-    borderRadius: "8px"
-    border: "1px solid transparent"
+Counter := =>
+  [count, setCount] := useState 0
+  [isHovered, setIsHovered] := useState false
+  style :=
+    borderRadius: "0.5rem"
+    borderWidth: "1px" 
+    borderStyle: "solid"
+    borderColor: if isHovered { "#646cff" } else { "transparent" }
     padding: "0.6em 1.2em"
     fontSize: "1rem"
     fontWeight: "500"
     backgroundColor: "#f9f9f9"
     cursor: "pointer"
     transition: "border-color 0.25s"
-    "&:hover":
-      borderColor: "#646cff"
-    "&:focus, &:focus-visible":
-      outline: "4px auto -webkit-focus-ring-color"
-
-Counter := =>
-  [count, setCount] := useState 0
-  classes := useButtonStyles()
-  <button .{classes.counter} onClick={=> setCount count+1}>
+  callbacks :=
+    onClick : => setCount count+1
+    onMouseEnter: => setIsHovered true
+    onMouseLeave: => setIsHovered false
+  <button {style} ...callbacks>
     `count is ${count}`
 
 Hero := ({children}) =>
   <h1 style={margin: "2rem"}>
-    "Vite + React + Civet"
+    children
 
 Card := =>
   <div .card style={padding: "2em", textAlign: "center"}>
@@ -104,7 +104,6 @@ Footnote := =>
     "Click on the Vite, React and Civet logos to learn more"
 
 export default App := =>
-  [count, setCount] := useState 0
   style : React.CSSProperties := 
     display: "flex"
     justifyContent: "center"

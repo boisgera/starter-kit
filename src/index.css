@@ -28,9 +28,10 @@ h1 {
 }
 
 button {
-  all: unset;
+  /* all: unset; Tempting but would remove default :focus style */
   cursor: pointer;
   font-family: inherit;
+  /* border-color: transparent; */
 }
 
 code {
