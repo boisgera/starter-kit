@@ -68,21 +68,21 @@ Logos := =>
 Counter := =>
   [count, setCount] := useState 0
   [isHovered, setIsHovered] := useState false
+  callbacks :=
+    onClick : => setCount count+1
+    onMouseEnter: => setIsHovered true
+    onMouseLeave: => setIsHovered false
   style :=
     borderRadius: "0.5rem"
     borderWidth: "1px" 
     borderStyle: "solid"
     borderColor: if isHovered { "#646cff" } else { "transparent" }
+    transition: "border-color 0.25s"
     padding: "0.6em 1.2em"
     fontSize: "1rem"
     fontWeight: "500"
     backgroundColor: "#f9f9f9"
     cursor: "pointer"
-    transition: "border-color 0.25s"
-  callbacks :=
-    onClick : => setCount count+1
-    onMouseEnter: => setIsHovered true
-    onMouseLeave: => setIsHovered false
   <button {style} ...callbacks>
     `count is ${count}`
 
