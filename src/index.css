@@ -1,25 +1,38 @@
 /* Inter */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 /* JetBrains Mono */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
 
 :root {
-    font-family: "Inter", sans-serif;
-    font-size: 16px;
-    text-rendering: optimizeLegibility;
+  font-family: "Inter", sans-serif;
+  font-size: 16px;
+  text-rendering: optimizeLegibility;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  margin: 1.5rem 0;
 }
 
 h1 {
-    font-size: 3rem;
-    font-weight: 700;
+  font-size: 3rem;
+  font-weight: 700;
 }
 
 button {
-    all: unset;
-    cursor: pointer;
-    font-family: inherit;
+  all: unset;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 code {
-    font-family: "JetBrains Mono", monospace;
+  font-family: "JetBrains Mono", monospace;
 }

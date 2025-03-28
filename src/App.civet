@@ -46,8 +46,6 @@ Logo := ({name, src, href, animate=false}) =>
     class: classes[name]
     src: src
     height: "96px"
-    style:
-      padding: "1.5rem"
     alt: `${name} logo`
   animation :=   
     animate:
@@ -63,7 +61,7 @@ Logo := ({name, src, href, animate=false}) =>
       <img {...shared}>
 
 Logos := =>
-  <div>
+  <div style={display: "flex", gap: "1.5rem", padding: "1.5rem"}>
     for name, info in brands
       <Logo key=name {name, ...info}>
 
@@ -88,14 +86,18 @@ Counter := =>
   <button .{classes.counter} onClick={=> setCount count+1}>
     `count is ${count}`
 
+Hero := ({children}) =>
+  <h1 style={margin: "2rem"}>
+    "Vite + React + Civet"
+
 Card := =>
   <div .card style={padding: "2em", textAlign: "center"}>
-  <Counter>
-  <p style={color: "#213547"}>
-    "Edit " 
-    <code>
-      "src/App.civet"
-    " and save to test HMR"
+    <Counter>
+    <p style={color: "#213547"}>
+      "Edit " 
+      <code>
+        "src/App.civet"
+      " and save to test HMR"
 
 Footnote := =>
   <p .read-the-docs style={color: "#888"}>
@@ -111,7 +113,7 @@ export default App := =>
     height: "100vh"
   <div {style}>
     <Logos>
-    <h1>
+    <Hero>
       "Vite + React + Civet"
     <Card>
     <Footnote>
