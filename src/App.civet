@@ -8,7 +8,6 @@ import {useState} from "react"
 import {createUseStyles} from "react-jss"
 import {motion} from "motion/react"
 
-
 type Brand =
   src: HTMLImageElement["src"]
   href: HTMLAnchorElement["href"]
@@ -33,20 +32,16 @@ brands : Brands :=
     href: "https://civet.dev"
     color: "#8b4513aa"
 
-useBrandStyles := createUseStyles Object.fromEntries  
-  for name, info in brands
-    . name,
-    . "&:hover":
-        filter: 
-          `drop-shadow(0 0 2em ${info.color})`
-
 Logo := ({name, src, href, animate=false}) =>
-  classes := useBrandStyles()
+  [isHovered, setIsHovered] := useState false
   shared := 
-    className: classes[name]
     src: src
     height: "96px"
     alt: `${name} logo`
+    onMouseEnter: => setIsHovered true
+    onMouseLeave: => setIsHovered false
+    style :
+      filter: `drop-shadow(0 0 2em ${brands[name].color})` if isHovered
   animation :=   
     animate:
       rotate: 360
@@ -116,4 +111,3 @@ export default App := =>
       "Vite + React + Civet"
     <Card>
     <Footnote>
-
