@@ -33,7 +33,7 @@ brands : Brands :=
 
 Logo := ({name, src, href, animate=false}) =>
   [isHovered, setIsHovered] := useState false
-  shared := 
+  props := 
     src: src
     height: "96px"
     alt: `${name} logo`
@@ -50,34 +50,34 @@ Logo := ({name, src, href, animate=false}) =>
       duration: 20.0
   <a {href} target="_blank"> 
     if animate
-      <motion.img ...shared ...animation>
+      <motion.img ...props ...animation>
     else
-      <img ...shared>
+      <img ...props>
 
 Logos := =>
   <div style={display: "flex", gap: "1.5rem", padding: "1.5rem"}>
     for name, info in brands
-      <Logo key=name {name, ...info}>
+      <Logo key=name {name} ...info>
 
 Counter := =>
   [count, setCount] := useState 0
   [isHovered, setIsHovered] := useState false
-  callbacks :=
+  props :=
     onClick : => setCount count+1
     onMouseEnter: => setIsHovered true
     onMouseLeave: => setIsHovered false
-  style :=
-    borderRadius: "0.5rem"
-    borderWidth: "1px" 
-    borderStyle: "solid"
-    borderColor: if isHovered then "#646cff" else "transparent"
-    transition: "border-color 0.25s"
-    padding: "0.6em 1.2em"
-    fontSize: "1rem"
-    fontWeight: "500"
-    backgroundColor: "#f9f9f9"
-    cursor: "pointer"
-  <button {style} ...callbacks>
+    style:
+      borderRadius: "0.5rem"
+      borderWidth: "1px" 
+      borderStyle: "solid"
+      borderColor: if isHovered then "#646cff" else "transparent"
+      transition: "border-color 0.25s"
+      padding: "0.6em 1.2em"
+      fontSize: "1rem"
+      fontWeight: "500"
+      backgroundColor: "#f9f9f9"
+      cursor: "pointer"
+  <button ...props>
     `count is ${count}`
 
 Hero := ({children}) =>
